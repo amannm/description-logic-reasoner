@@ -1,5 +1,6 @@
+extern "C" {
 #include "DL.h"
-
+}
 #include <unordered_map>
 #include <unordered_set>
 

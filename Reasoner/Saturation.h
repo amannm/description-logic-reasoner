@@ -1,4 +1,6 @@
+extern "C" {
 #include "DL.h"
+}
 
 #include <mutex>
 #include <queue>
