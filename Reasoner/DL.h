@@ -22,7 +22,7 @@ void Axiom_ConceptDisjointedness_apply(Concept*, Concept*);
 void Axiom_RoleInclusion_apply(Concept*, Concept*);
 void Axiom_RoleEquivalence_apply(Concept*, Concept*);
 
-	
+
 void Axiom_TransitiveRole_apply(Concept*, Concept*);
 void Axiom_ReflexiveRole_apply(Concept*, Concept*);
 
