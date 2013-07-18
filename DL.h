@@ -1,10 +1,10 @@
 struct Concept;
 struct Role;
 
-typedef struct Results {
+typedef struct {
 	Concept** superConcepts;
 	int size;
-};
+} Results;
 
 Concept* Concept_ExistentialRoleRestriction_create(Role*, Concept*);
 Concept* Concept_Conjunction_create(Concept**, int);
