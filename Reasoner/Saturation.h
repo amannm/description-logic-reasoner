@@ -1,10 +1,11 @@
-extern "C" {
-#include "DL.h"
-}
+#pragma once
+
+struct Concept;
+struct Role;
 
 #include <mutex>
 #include <queue>
-
+#include <condition_variable>
 
 namespace Saturation {
 	std::mutex queueAccess;

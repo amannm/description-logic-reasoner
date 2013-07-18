@@ -1,4 +1,5 @@
 #include "Saturation.h"
+#include "Concept.h"
 
 #include <condition_variable>
 #include <tuple>

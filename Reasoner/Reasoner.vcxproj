@@ -74,14 +74,20 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AtomicConcept.cpp" />
     <ClCompile Include="Concept.cpp" />
+    <ClCompile Include="Conjunction.cpp" />
     <ClCompile Include="DL.cpp" />
+    <ClCompile Include="ExistentialRoleRestriction.cpp" />
     <ClCompile Include="Role.cpp" />
     <ClCompile Include="Saturation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AtomicConcept.h" />
     <ClInclude Include="Concept.h" />
+    <ClInclude Include="Conjunction.h" />
     <ClInclude Include="DL.h" />
+    <ClInclude Include="ExistentialRoleRestriction.h" />
     <ClInclude Include="Role.h" />
     <ClInclude Include="Saturation.h" />
   </ItemGroup>

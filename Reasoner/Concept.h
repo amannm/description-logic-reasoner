@@ -1,14 +1,13 @@
-extern "C" {
-#include "DL.h"
-}
+#pragma once
+
+struct Role;
+struct ExistentialRoleRestriction;
+struct Conjunction;
 
 #include <unordered_map>
 #include <unordered_set>
 #include <mutex>
 #include <queue>
-
-struct ExistentialRoleRestriction;
-struct Conjunction;
 
 struct Concept {
 

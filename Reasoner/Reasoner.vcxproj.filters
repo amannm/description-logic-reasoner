@@ -30,6 +30,15 @@
     <ClCompile Include="Role.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ExistentialRoleRestriction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Conjunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AtomicConcept.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DL.h">
@@ -42,6 +51,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Role.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExistentialRoleRestriction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Conjunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AtomicConcept.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

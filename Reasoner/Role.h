@@ -1,11 +1,10 @@
-extern "C" {
-#include "DL.h"
-}
+#pragma once
+
+struct Concept;
+struct ExistentialRoleRestriction;
+
 #include <unordered_map>
 #include <unordered_set>
-
-struct ExistentialRoleRestriction;
-struct Conjunction;
 
 
 struct Role {

@@ -1,4 +1,6 @@
 #include "Concept.h"
+#include "Role.h"
+#include "Saturation.h"
 
 struct ExistentialRoleRestriction : Concept {
 
@@ -53,8 +55,8 @@ struct Conjunction : Concept {
 	}
 	virtual void initialize() final override {
 		if(attributes.negativeOccurences > 0) {
-			for(int i = 0; i < conjunctConcepts.size(); ++i) {
-				for(int x = i + 1; x < conjunctConcepts.size(); ++x) {
+			for(size_t i = 0; i < conjunctConcepts.size(); ++i) {
+				for(size_t x = i + 1; x < conjunctConcepts.size(); ++x) {
 					conjunctConcepts[i]->attributes.negativelyOccurringConjugationUses.emplace(conjunctConcepts[x], this);
 					conjunctConcepts[x]->attributes.negativelyOccurringConjugationUses.emplace(conjunctConcepts[i], this);
 				}
@@ -111,16 +113,3 @@ void Concept::process(Role* predicate, Concept* object) {
 }
 
 
-Concept* Concept_ExistentialRoleRestriction_create(Role* r, Concept* c) {
-	return new ExistentialRoleRestriction(r, c);
-}
-Concept* Concept_Conjunction_create(Concept** conjuncts, int length) {
-	std::vector<Concept*> conjv;
-	while(--length != -1) {
-		conjv.push_back(conjuncts[length]);
-	}
-	return new Conjunction(std::move(conjv));
-}
-Concept* Concept_Atomic_create() {
-	return new Atomic();
-}
