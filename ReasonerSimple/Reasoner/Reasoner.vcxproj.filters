@@ -7,7 +7,7 @@
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
@@ -18,61 +18,49 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Reasoner.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Saturation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Role.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Concept.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Indexing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Job.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ReasonerObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Individual.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ontology.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Axiom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Reasoner.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Logger.cpp">
+    <ClCompile Include="DL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Saturation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Indexing.cpp">
+    <ClCompile Include="Concept.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Job.cpp">
+    <ClCompile Include="Role.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ExistentialRoleRestriction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Conjunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AtomicConcept.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Saturation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Concept.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Role.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExistentialRoleRestriction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Conjunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AtomicConcept.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

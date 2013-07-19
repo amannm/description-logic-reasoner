@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{30031F90-7A95-4154-A3B1-AA224649D771}</ProjectGuid>
+    <ProjectGuid>{EA446060-2DD6-4BB8-A3CF-03F69697A480}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Reasoner</RootNamespace>
   </PropertyGroup>
@@ -47,7 +47,6 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -63,7 +62,6 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -76,26 +74,22 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Axiom.h" />
-    <ClInclude Include="Common.h" />
-    <ClInclude Include="Concept.h" />
-    <ClInclude Include="Indexing.h" />
-    <ClInclude Include="Individual.h" />
-    <ClInclude Include="Job.h" />
-    <ClInclude Include="Logger.h" />
-    <ClInclude Include="Ontology.h" />
-    <ClInclude Include="Parser.h" />
-    <ClInclude Include="Reasoner.h" />
-    <ClInclude Include="ReasonerObject.h" />
-    <ClInclude Include="Role.h" />
-    <ClInclude Include="Saturation.h" />
+    <ClCompile Include="AtomicConcept.cpp" />
+    <ClCompile Include="Concept.cpp" />
+    <ClCompile Include="Conjunction.cpp" />
+    <ClCompile Include="DL.cpp" />
+    <ClCompile Include="ExistentialRoleRestriction.cpp" />
+    <ClCompile Include="Role.cpp" />
+    <ClCompile Include="Saturation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Indexing.cpp" />
-    <ClCompile Include="Job.cpp" />
-    <ClCompile Include="Logger.cpp" />
-    <ClCompile Include="Reasoner.cpp" />
-    <ClCompile Include="Saturation.cpp" />
+    <ClInclude Include="AtomicConcept.h" />
+    <ClInclude Include="Concept.h" />
+    <ClInclude Include="Conjunction.h" />
+    <ClInclude Include="DL.h" />
+    <ClInclude Include="ExistentialRoleRestriction.h" />
+    <ClInclude Include="Role.h" />
+    <ClInclude Include="Saturation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

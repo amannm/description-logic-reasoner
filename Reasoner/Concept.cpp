@@ -1,115 +1,42 @@
+
 #include "Concept.h"
 #include "Role.h"
 #include "Saturation.h"
 
-struct ExistentialRoleRestriction : Concept {
+#include "Logger.h"
 
-	Role* role;
-	Concept* roleFiller;
-
-	ExistentialRoleRestriction(Role* r, Concept* c) :
-		role(r),
-		roleFiller(c) {}
-
-	virtual void addNegativeOccurence() final override {
-		++attributes.negativeOccurences;
-		roleFiller->addNegativeOccurence();
-	}
-	virtual void addPositiveOccurence() final override {
-		++attributes.positiveOccurences;
-		roleFiller->addPositiveOccurence();
-	}
-	virtual void addSubClass(Concept* sub) final override {
-		Saturation::addMessage(roleFiller, role, sub);
-	}
-	virtual void initialize() final override {
-		if(attributes.negativeOccurences > 0) {
-			role->attributes.negativelyOccurringExistentialRoleRestrictionUses.emplace(roleFiller, this);
-			roleFiller->attributes.negativelyOccurringExistentialRoleRestrictionUses.emplace(role, this);
-		}
-	}
-};
-struct Conjunction : Concept {
-
-	std::vector<Concept*> conjunctConcepts;
-
-	Conjunction(std::vector<Concept*> && conjv) :
-		conjunctConcepts(std::move(conjv)) {}
-
-	virtual void addNegativeOccurence() final override {
-		++attributes.negativeOccurences;
-		for(auto c : conjunctConcepts) {
-			c->addPositiveOccurence();
-		}
-	}
-	virtual void addPositiveOccurence() final override {
-		++attributes.positiveOccurences;
-		for(auto c : conjunctConcepts) {
-			c->addPositiveOccurence();
-		}
-	}
-	virtual void addSubClass(Concept* sub) final override {
-		for(auto c : conjunctConcepts) {
-			sub->inferences.superConceptQueue.push(c);
-		}
-	}
-	virtual void initialize() final override {
-		if(attributes.negativeOccurences > 0) {
-			for(size_t i = 0; i < conjunctConcepts.size(); ++i) {
-				for(size_t x = i + 1; x < conjunctConcepts.size(); ++x) {
-					conjunctConcepts[i]->attributes.negativelyOccurringConjugationUses.emplace(conjunctConcepts[x], this);
-					conjunctConcepts[x]->attributes.negativelyOccurringConjugationUses.emplace(conjunctConcepts[i], this);
-				}
-			}
-		}
-	}
-};
-struct Atomic : Concept {
-	virtual void addNegativeOccurence() final override {
-		++attributes.negativeOccurences;
-	}
-	virtual void addPositiveOccurence() final override {
-		++attributes.positiveOccurences;
-	}
-	virtual void addSubClass(Concept* sub) final override {
-		sub->taxonomy.superConcepts.insert(this);
-	}
-	virtual void initialize() final override {
-		Saturation::addMessage(this);
-	}
-};
+#include <iterator>
 
 
-void Concept::process(Role* predicate, Concept* object) {
-	std::lock_guard<std::mutex> lock(inferences.access);
-	if(predicate != nullptr) {
-		if(inferences.predecessors.emplace(predicate, object).second) {
-			for(auto pair : predicate->attributes.negativelyOccurringExistentialRoleRestrictionUses) {
-				if(inferences.superConcepts.find(pair.first) != inferences.superConcepts.end()) {
-					Saturation::addMessage(object, pair.second);
-				}
-			}
-		}
-		inferences.superConceptQueue.push(this);
+TopConcept* top;
+
+Concept* Concept::getTop() {
+	if(top == nullptr) {
+		top = new TopConcept();
 	}
-	else {
-		inferences.superConceptQueue.push(object);
-	}
-	while(inferences.superConceptQueue.size() != 0) {
-		Concept* superConcept = inferences.superConceptQueue.front();
-		inferences.superConceptQueue.pop();
-		if(inferences.superConcepts.insert(superConcept).second) {
-			superConcept->addSubClass(this);
-			for(auto superSuper : superConcept->attributes.subConceptUses)
-				inferences.superConceptQueue.push(superSuper);
-			for(auto pair : superConcept->attributes.negativelyOccurringConjugationUses)
-				if(inferences.superConcepts.find(pair.first) != inferences.superConcepts.end())
-					inferences.superConceptQueue.push(pair.second);
-			for(auto pair : superConcept->attributes.negativelyOccurringExistentialRoleRestrictionUses)
-				for(auto range = inferences.predecessors.equal_range(pair.first); range.first != range.second; ++range.first)
-					Saturation::addMessage(pair.second->roleFiller, pair.second->role, range.first->second);
-		}
-	}
+	return top;
+}
+Concept::Concept() {
+	attributes.negativeOccurences = 0;
 }
 
 
+
+ExistentialConcept::ExistentialConcept(Role* r, Concept* c) :
+	role(r),
+	roleFiller(c) {
+		attributes.ancestralConcepts.push_back(c);
+		attributes.ancestralConcepts.insert(attributes.ancestralConcepts.end(), c->attributes.ancestralConcepts.begin(), c->attributes.ancestralConcepts.end());
+}
+
+
+
+IntersectionConcept::IntersectionConcept(Concept* a, Concept* b) : 
+	first(a),
+	second(b) {
+		attributes.ancestralConcepts.push_back(a);
+		attributes.ancestralConcepts.insert(attributes.ancestralConcepts.end(), a->attributes.ancestralConcepts.begin(), a->attributes.ancestralConcepts.end());
+		attributes.ancestralConcepts.push_back(b);
+		attributes.ancestralConcepts.insert(attributes.ancestralConcepts.end(), b->attributes.ancestralConcepts.begin(), b->attributes.ancestralConcepts.end());
+
+}

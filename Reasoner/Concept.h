@@ -1,43 +1,65 @@
 #pragma once
 
-struct Role;
-struct ExistentialRoleRestriction;
-struct Conjunction;
+#include "Logger.h"
 
-#include <unordered_map>
-#include <unordered_set>
+#include <vector>
 #include <mutex>
-#include <queue>
+#include <unordered_set>
+#include <unordered_map>
+
+struct Role;
+struct Individual;
 
 struct Concept {
 
+	enum class Form {
+		Unreferenced,
+		Top,
+		Bottom,
+		Named,
+		Intersection,
+		Union,
+		Complement,
+		Nominal,
+		ExistentialRestriction,
+		UniversalRestriction,
+	} form;
+
+	std::mutex access;
+	std::string name;
+
+	union {
+		Individual* member;
+		Role* role;
+		Concept* first;
+		Concept* complement;
+	};
+
+	union {
+		Concept* second;
+		Concept* filler;
+	};
+
 	struct {
-		std::mutex access;
-		std::unordered_set<Concept*> subConceptUses;
-		std::unordered_map<Role*, ExistentialRoleRestriction*> negativelyOccurringExistentialRoleRestrictionUses;
-		std::unordered_map<Concept*, Conjunction*> negativelyOccurringConjugationUses;
-		int negativeOccurences;
-		int positiveOccurences;
+		std::vector<Concept*> subConceptUses;
+		std::vector<std::pair<Role*, Concept*>> subsumedExistentialUses;
+		std::vector<std::pair<Concept*, Concept*>> subsumedIntersectionUses;
 	} attributes;
 
 	struct {
-		std::mutex access;
-		std::queue<Concept*> superConceptQueue;
+		std::vector<Concept*> superConceptQueue;
 		std::unordered_set<Concept*> superConcepts;
-		std::unordered_map<Role*, Concept*> predecessors;
+		std::unordered_map<Role*, std::unordered_set<Concept*>> predecessors;
+		std::unordered_map<Role*, std::unordered_set<Concept*>> successors;
 	} inferences;
 
-	struct {
-		std::mutex access;
-		std::unordered_set<Concept*> superConcepts;
-		std::unordered_set<Concept*> directSuperConcepts;
-		std::unordered_set<Concept*> equivalentConcepts;
-	} taxonomy;
+	Concept() :
+		first(nullptr), second(nullptr), form(Form::Unreferenced) {}
 
-	virtual void addNegativeOccurence() = 0;
-	virtual void addPositiveOccurence() = 0;
-	virtual void addSubClass(Concept*) = 0;
-	virtual void initialize() = 0;
+	Concept(Form f) :
+		first(nullptr), second(nullptr), form(f) {}
 
-	void process(Role*, Concept*);
+	void log(const std::string& s) {
+		Logger::print("<Concept " + name + "> " + s);
+	}
 };
