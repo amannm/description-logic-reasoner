@@ -4,7 +4,7 @@ DescriptionLogic
 A C++ Description Logic Reasoner with C interface
 
 Features:
- - C interface
+ - Static library with C ABI
  - Platform independent C++11 standard library usage
  - Multithreaded
  - Description Logic Expressivity: EL, ELR, ELH
