@@ -12,7 +12,7 @@ struct Individual;
 
 struct Concept {
 
-	enum class Form {
+	enum class Form : uint32_t {
 		Unreferenced,
 		Top,
 		Bottom,

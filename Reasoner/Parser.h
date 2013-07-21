@@ -2,6 +2,7 @@
 #include "Role.h"
 #include "Individual.h"
 #include "Job.h"
+#include "Axiom.h"
 #include <unordered_map>
 
 
@@ -201,7 +202,7 @@ namespace EL {
 
 	Concept* getConceptReference(FILE* stream) {
 
-		uint32_t type;
+		Concept::Form type;
 		fread(&type, 4, 1, stream);
 		uint32_t index;
 		fread(&index, 4, 1, stream);
@@ -254,7 +255,7 @@ namespace EL {
 		}
 	}
 
-	void parseIntersectionConcepts(std::istream& stream) {
+	void parseIntersectionConcepts(FILE* stream) {
 		printf("Parsing %u Intersection Concepts", fread(&numIntersectionConcepts, 4, 1, stream));
 		intersectionConcepts = new Concept[numIntersectionConcepts];
 		for(uint32_t i = 0; i < numIntersectionConcepts; ++i) {
